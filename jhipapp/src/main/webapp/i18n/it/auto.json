@@ -1,0 +1,26 @@
+{
+    "jhipappApp": {
+        "auto" : {
+            "home": {
+                "title": "Autos",
+                "createLabel": "Genera un nuovo Auto",
+                "createOrEditLabel": "Genera o modifica un Auto",
+                "search": "Cerca Auto"
+            },
+            "created": "&Egrave; stato generato un nuovo Auto con identificatore { param }}",
+            "updated": "&Egrave; stato aggiornato Auto identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Auto con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Auto {{ id }}?"
+            },
+            "detail": {
+                "title": "Auto"
+            },
+            "targa": "Targa",
+            "datainserimento": "Datainserimento",
+            "lat": "Lat",
+            "lng": "Lng",
+            "stato": "Stato"
+        }
+    }
+}

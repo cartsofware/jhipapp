@@ -1,0 +1,92 @@
+<div>
+    <h2 data-translate="jhipappApp.auto.home.title">Autos</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="auto.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="jhipappApp.auto.home.createLabel">
+                        Create new Auto
+                    </span>
+                </button>
+            </div>
+            
+            <div class="col-xs-8 no-padding-right text-right">
+            	<button class="btn btn-primary" ng-click="exportToExcel('#table1')">
+        			<span class="glyphicon glyphicon-share"></span> Export to Excel
+    			</button>
+    			
+    			<a class="btn btn-primary" title="Export Table" ng-click='csv.generate()' ng-href="{{ csv.link() }}"
+         			download="autos.csv">
+        			<span class="glyphicon glyphicon-new-window"></span> Export CSV
+      			</a>
+            </div>
+            
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+     	
+        <table class="jh-table table table-striped" id="table1" export-csv="csv" separator=";">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="targa"><span data-translate="jhipappApp.auto.targa">Targa</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="datainserimento"><span data-translate="jhipappApp.auto.datainserimento">Datainserimento</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lat"><span data-translate="jhipappApp.auto.lat">Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lng"><span data-translate="jhipappApp.auto.lng">Lng</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="stato"><span data-translate="jhipappApp.auto.stato">Stato</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="auto in vm.autos track by auto.id">
+                    <td><a ui-sref="auto-detail({id:auto.id})">{{auto.id}}</a></td>
+                    <td>{{auto.targa}}</td>
+                    <td>{{auto.datainserimento | date:'medium'}}</td>
+                    <td>{{auto.lat}}</td>
+                    <td>{{auto.lng}}</td>
+                    <td data-translate="{{'jhipappApp.Statoauto.' + auto.stato}}">{{auto.stato}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="auto-detail({id:auto.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="auto.edit({id:auto.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="auto.delete({id:auto.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div map-lazy-load="https://maps.google.com/maps/api/js">
+  		<ng-map center="42.88207,13.2822778" zoom="6">  		
+  			<marker ng-repeat="auto in vm.autos track by auto.id" position="{{auto.lat}}, {{auto.lng}}"
+  				id="{{auto.id}}" title="{{auto.targa}}" on-click="vm.showAuto(auto)">  				
+  				<info-window id="map_info">
+	      			<div ng-non-bindable>
+	        			Targa: <b>{{vm.selectedAuto.targa}}</b><br/>
+	        			Stato: {{vm.selectedAuto.stato}}<br/>
+	      			</div>
+	    		</info-window>		
+			</marker>
+  		</ng-map>
+	</div>
+	
+</div>

@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "targa",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "([a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2})"
+        },
+        {
+            "fieldName": "datainserimento",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "stato",
+            "fieldType": "Statoauto",
+            "fieldValues": "libero,occupato,manutenzione,prenotato"
+        }
+    ],
+    "changelogDate": "20170116112248",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "auto",
+    "pagination": "infinite-scroll"
+}

@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="jhipappApp.auto.detail.title">Auto</span> {{vm.auto.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipappApp.auto.targa">Targa</span></dt>
+        <dd>
+            <span>{{vm.auto.targa}}</span>
+        </dd>
+        <dt><span data-translate="jhipappApp.auto.datainserimento">Datainserimento</span></dt>
+        <dd>
+            <span>{{vm.auto.datainserimento | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="jhipappApp.auto.lat">Lat</span></dt>
+        <dd>
+            <span>{{vm.auto.lat}}</span>
+        </dd>
+        <dt><span data-translate="jhipappApp.auto.lng">Lng</span></dt>
+        <dd>
+            <span>{{vm.auto.lng}}</span>
+        </dd>
+        <dt><span data-translate="jhipappApp.auto.stato">Stato</span></dt>
+        <dd>
+            <span data-translate="{{'jhipappApp.Statoauto.' + vm.auto.stato}}">{{vm.auto.stato}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="auto-detail.edit({id:vm.auto.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

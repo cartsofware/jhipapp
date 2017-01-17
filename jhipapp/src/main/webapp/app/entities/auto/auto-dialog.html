@@ -1,0 +1,83 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAutoLabel" data-translate="jhipappApp.auto.home.createOrEditLabel">Create or edit a Auto</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.auto.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.auto.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipappApp.auto.targa" for="field_targa">Targa</label>
+            <input type="text" class="form-control" name="targa" id="field_targa"
+                    ng-model="vm.auto.targa"
+                    required ng-pattern="/([a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2})/" />
+            <div ng-show="editForm.targa.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.targa.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.targa.$error.pattern" data-translate="entity.validation.pattern" translate-value-pattern="([a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2})">
+                    This field should follow pattern "([a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2})".
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipappApp.auto.datainserimento" for="field_datainserimento">Datainserimento</label>
+                <div class="input-group">
+                    <input id="field_datainserimento" type="text" class="form-control" name="datainserimento" datetime-picker="{{dateformat}}" ng-model="vm.auto.datainserimento" is-open="vm.datePickerOpenStatus.datainserimento"
+                    required  />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datainserimento')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.datainserimento.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.datainserimento.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.datainserimento.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipappApp.auto.lat" for="field_lat">Lat</label>
+            <input type="number" step="0.00001" class="form-control" name="lat" id="field_lat"
+                    ng-model="vm.auto.lat"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipappApp.auto.lng" for="field_lng">Lng</label>
+            <input type="number" step="0.00001" class="form-control" name="lng" id="field_lng"
+                    ng-model="vm.auto.lng"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="jhipappApp.auto.stato" for="field_stato">Stato</label>
+            <select class="form-control" name="stato" ng-model="vm.auto.stato" id="field_stato">
+                <option value="libero" data-translate="jhipappApp.Statoauto.libero">libero</option>
+                <option value="occupato" data-translate="jhipappApp.Statoauto.occupato">occupato</option>
+                <option value="manutenzione" data-translate="jhipappApp.Statoauto.manutenzione">manutenzione</option>
+                <option value="prenotato" data-translate="jhipappApp.Statoauto.prenotato">prenotato</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

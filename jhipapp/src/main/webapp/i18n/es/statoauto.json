@@ -1,0 +1,11 @@
+{
+    "jhipappApp": {
+        "Statoauto" : {
+            "null": "",
+            "libero": "libero",
+            "occupato": "occupato",
+            "manutenzione": "manutenzione",
+            "prenotato": "prenotato"
+        }
+    }
+}
